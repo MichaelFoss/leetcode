@@ -1,0 +1,40 @@
+[user]
+	name = Michael Foss
+	email = michael@mikefoss.com
+[core]
+	editor = vim
+	# excludesfile = /Users/mfoss/.gitignore_global
+[alias]
+	c = commit
+	p = pull
+	f = fetch --prune
+	co = checkout
+	cob = checkout -b
+	br = branch
+	brc = rev-parse --abbrev-ref HEAD
+	brd = branch -d
+	brD = branch -D
+	brdr = !git push :$(git rev-parse --abbrev-ref HEAD) && git branch --unset-upstream $(git rev-parse --abbrev-ref HEAD)
+	brname = rev-parse --abbrev-ref HEAD
+	wip = !git add -A && git commit -m \"WIP\"
+	piw = reset HEAD~1
+	lg = log --graph --pretty=format:\"%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset\" --abbrev-commit
+	amend = commit --no-edit --amend
+	r = rebase
+	ri = rebase --interactive
+	ra = rebase --abort
+	rc = rebase --continue
+	rmain = "!BRANCH=$(git branch | grep \\* | cut -d ' ' -f2); OUTPUT=$(git status --porcelain); if [ -n \"$OUTPUT\" ]; then echo \"Storing working directory...\"; git wip; fi; git co main; git f; git p; git co $BRANCH; git r main && if [ -n \"$OUTPUT\" ]; then echo \"Restoring working directory...\"; git piw; fi"
+	rmaster = "!BRANCH=$(git branch | grep \\* | cut -d ' ' -f2); OUTPUT=$(git status --porcelain); if [ -n \"$OUTPUT\" ]; then echo \"Storing working directory...\"; git wip; fi; git co master; git f; git p; git co $BRANCH; git r master && if [ -n \"$OUTPUT\" ]; then echo \"Restoring working directory...\"; git piw; fi"
+	cp = cherry-pick
+	cpc = cherry-pick --continue
+	m = merge
+	ma = merge --abort
+	mc = merge --continue
+	aa = add -A
+	message = log -1 --pretty=%B
+	msg = log -1 --pretty=%B
+	push1 = !git push -u origin $(git rev-parse --abbrev-ref HEAD)
+	pushf = push --force
+[pager]
+	branch = false
